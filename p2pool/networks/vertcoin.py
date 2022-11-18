@@ -14,6 +14,9 @@ MAX_TARGET = 2**256//2**20 - 1
 PERSIST = True # Set to False for solo mining or starting a new chain
 WORKER_PORT = 9171
 BOOTSTRAP_ADDRS = [
+        'fr1.vtconline.org',
+        'p2proxy.vertcoin.org',
+        'vtc.consumableresources.com',
         'p2p-south.xyz',
         'p2p-ekb.xyz',
         'p2p-usa.xyz',
@@ -22,7 +25,7 @@ BOOTSTRAP_ADDRS = [
 ANNOUNCE_CHANNEL = '#p2pool'
 VERSION_CHECK = lambda v: True
 VERSION_WARNING = lambda v: None
-SOFTFORKS_REQUIRED = set(['bip34', 'bip66', 'bip65', 'csv', 'segwit'])
+SOFTFORKS_REQUIRED = set(['bip34', 'bip66', 'bip65', 'csv', 'segwit', 'taproot'])
 MINIMUM_PROTOCOL_VERSION = 3501
 SEGWIT_ACTIVATION_VERSION = 35
 BLOCK_MAX_SIZE = 8000000
