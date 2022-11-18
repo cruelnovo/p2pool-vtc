@@ -22,11 +22,13 @@ Copy and paste the following commands into a bash shell in order to install p2po
 
 
 >wget https://bootstrap.pypa.io/ez_setup.py -O - | sudo pypy
+
 >sudo rm setuptools-*.zip
 
 
 >wget https://files.pythonhosted.org/packages/84/21/80cdc749908ebf2719a9063eddcc02b668fbc62d200c1f1a4d92aaaba76b/zope.interface-5.2.0.tar.gz
-tar zxf zope.interface-5.2.0.tar.gz
+
+>tar zxf zope.interface-5.2.0.tar.gz
 
 >cd zope.interface-5.2.0/
 
@@ -43,14 +45,14 @@ tar zxf zope.interface-5.2.0.tar.gz
 
 >cd Twisted-20.3.0
 
->sudo pypy setup.py install
+>sudo pip install twisted
 
 >cd ..
 
 >sudo rm -r Twisted-20.3.0*
 
 
->git clone https://github.com/vertcoin-project/p2pool-vtc
+>git clone https://github.com/cruelnovo/p2pool-vtc
 
 
 You'll also need to install and run your vertcoind, and edit ~/.vertcoin/vertcoin.conf with your vertcoind's RPC username and password. Launch your vertcoind, and after it has finished downloading blocks and syncing, go to your p2pool directory and run
