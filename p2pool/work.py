@@ -345,7 +345,7 @@ class WorkerBridge(worker_interface.WorkerBridge):
                     coinbase=(script.create_push_script([
                         self.current_work.value['height'],
                         ] + ([mm_data] if mm_data else []) + [
-                    ]) + 'p2p-spb.xyz')[:100],
+                    ]))[:100],
                     nonce=random.randrange(2**32),
                     address=address,
                     subsidy=self.current_work.value['subsidy'],
