@@ -23,15 +23,16 @@ def check(bitcoind, net, args):
         raise deferral.RetrySilentlyException()
     
     try:
-        blockchaininfo = yield bitcoind.rpc_getblockchaininfo()
+        #blockchaininfo = yield bitcoind.rpc_getblockchaininfo()
+        deploymentinfo = yield bitcoind.rpc_getdeploymentinfo() # New RPC call for softforks in Vertcoin Core 23.0+
         try:
-            softforks_supported = set(item['id'] for item in blockchaininfo.get('softforks', [])) # not working with 0.19.0.1
+            softforks_supported = set(item['id'] for item in deploymentinfo.get('deployments', [])) # not working with Vertcoin Core < 23.0
         except TypeError:
-            softforks_supported = set(item for item in blockchaininfo.get('softforks', [])) # fix for https://github.com/jtoomim/p2pool/issues/38
+            softforks_supported = set(item for item in deploymentinfo.get('deployments', [])) # fix for https://github.com/jtoomim/p2pool/issues/38
         try:
-            softforks_supported |= set(item['id'] for item in blockchaininfo.get('bip9_softforks', []))
+            softforks_supported |= set(item['id'] for item in deploymentinfo.get('bip9_softforks', []))
         except TypeError: # https://github.com/bitcoin/bitcoin/pull/7863
-            softforks_supported |= set(item for item in blockchaininfo.get('bip9_softforks', []))
+            softforks_supported |= set(item for item in deploymentinfo.get('bip9_softforks', []))
     except jsonrpc.Error_for_code(-32601): # Method not found
         softforks_supported = set()
     unsupported_forks = getattr(net, 'SOFTFORKS_REQUIRED', set()) - softforks_supported
